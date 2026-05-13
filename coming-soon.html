@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon • HomeSparks</title>
+    <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Poppins', system_ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+    </style>
+</head>
+<body class="tail-container bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center gap-x-3">
+                    <img src="uploads/upload_1.png" alt="HomeSparks Logo" class="h-12 w-auto">
+                    <div class="flex flex-col">
+                        <span class="logo-font text-3xl font-extrabold tracking-tighter leading-none">
+                            <span class="text-[#0E7490]">Home</span><span class="text-[#F97316]">Sparks</span>
+                        </span>
+                        <span class="text-[0.6rem] font-semibold text-[#0E7490] tracking-wider uppercase mt-0.5">Home Cleaning Services</span>
+                    </div>
+                </a>
+                <a href="index.html" class="px-6 py-2.5 text-[#0E7490] font-semibold flex items-center gap-x-2 hover:bg-slate-50 rounded-2xl transition-all">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-grow flex items-center justify-center py-20 px-6">
+        <div class="max-w-2xl mx-auto text-center bg-white border border-slate-200 rounded-[2rem] p-12 shadow-sm">
+            <div class="w-20 h-20 mx-auto bg-orange-100 text-[#F97316] rounded-full flex items-center justify-center mb-8">
+                <i class="fa-solid fa-rocket fa-2xl"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">We're launching this soon!</h1>
+            <p class="text-lg text-slate-600 mb-10 max-w-lg mx-auto">
+                Our team is working hard to bring you the best home cleaning experience. This service will be available in your area shortly.
+            </p>
+            
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-8 max-w-md mx-auto">
+                <h3 class="font-semibold mb-3">Get notified when we launch</h3>
+                <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Thanks! We will notify you.'); this.reset();">
+                    <input type="email" placeholder="Enter your email" required class="flex-grow px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:border-[#0E7490] focus:ring-1 focus:ring-[#0E7490]">
+                    <button type="submit" class="px-6 py-3 bg-[#0E7490] hover:bg-[#085a72] text-white font-semibold rounded-xl transition-colors">Notify Me</button>
+                </form>
+            </div>
+            
+            <a href="index.html" class="inline-flex items-center gap-2 text-[#F97316] font-semibold hover:text-orange-700 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> Explore available services
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSparks • Professional Home Cleaning Services</title>
+    <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600&display=swap"
+        rel="stylesheet">
+    <style>
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+
+        .logo-font {
+            font-family: 'Poppins', system_ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+    </style>
+</head>
+
+<body class="tail-container bg-slate-50 text-slate-800">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-x-3">
+                    <img src="uploads/upload_1.png" alt="HomeSparks Logo" class="h-12 w-auto">
+                    <div class="flex flex-col">
+                        <span class="logo-font text-3xl font-extrabold tracking-tighter leading-none">
+                            <span class="text-[#0E7490]">Home</span><span class="text-[#F97316]">Sparks</span>
+                        </span>
+                        <span class="text-[0.6rem] font-semibold text-[#0E7490] tracking-wider uppercase mt-0.5">Home
+                            Cleaning Services</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#services" class="hover:text-[#0E7490]">Services</a>
+                    <a href="#how-it-works" class="hover:text-[#0E7490]">How It Works</a>
+                    <a href="#contact" class="hover:text-[#0E7490]">Contact</a>
+                </div>
+                <div>
+                    <a href="#contact"
+                        class="px-6 py-2.5 bg-[#0E7490] text-white text-sm font-semibold rounded-2xl flex items-center gap-x-2">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Book Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="h-[640px] flex items-center relative"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.5)), url('images/hero_kitchen.png'); background-size: cover; background-position: center;">
+        <div class="max-w-screen-xl mx-auto px-6 w-full">
+            <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+                <div data-aos="fade-down"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-slate-800 text-sm font-semibold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    Rated #1 Home Cleaning in the City
+                </div>
+                <h1 data-aos="fade-up" class="text-white text-6xl md:text-7xl font-extrabold tracking-tighter">Your
+                    home.<br> Sparkling clean.</h1>
+                <p data-aos="fade-up" data-aos-delay="100" class="mt-6 text-lg md:text-xl text-white/90 max-w-2xl">
+                    Professional home cleaning services that bring the sparkle back to your space. Trusted by 4,800+
+                    happy homes.</p>
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact"
+                        class="px-8 py-4 bg-[#F97316] hover:bg-orange-600 text-white font-semibold rounded-full inline-flex items-center justify-center gap-2 transition-all">
+                        Book Your Cleaning
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#how-it-works"
+                        class="px-8 py-4 bg-white hover:bg-slate-50 text-[#0E7490] font-semibold rounded-full flex items-center justify-center transition-all">
+                        See how it works
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <div id="services" class="max-w-screen-xl mx-auto px-6 pt-20 pb-16">
+        <div data-aos="fade-up" class="text-center mb-12">
+            <div class="text-[#F97316] font-bold text-sm tracking-[1.5px]">WHAT WE CLEAN</div>
+            <h2 class="text-5xl font-bold tracking-tighter">Our Services</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dish Washing - Available -->
+            <div data-aos="fade-up" data-aos-delay="100" class="bg-white border p-6 rounded-3xl">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-utensils fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Dish Washing &amp; Kitchen</h3>
+                <p class="mt-2 text-slate-600">Flexible plans with professional cleaning.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <div class="font-bold text-xl">From ₹69</div>
+                    <button onclick="scrollToContactAndSelect('Dish Washing &amp; Kitchen')"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</button>
+                </div>
+            </div>
+
+            <!-- Full House Cleaning -->
+            <div data-aos="fade-up" data-aos-delay="200"
+                class="bg-white border p-6 rounded-3xl relative overflow-hidden group">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-house fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Full House Cleaning</h3>
+                <p class="mt-2 text-slate-600">Complete top-to-bottom cleaning for your home.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <span class="text-xs bg-orange-100 text-[#F97316] font-semibold px-3 py-1 rounded-full">Coming
+                        Soon</span>
+                    <a href="coming-soon.html"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</a>
+                </div>
+            </div>
+
+            <!-- Bathroom Deep Clean -->
+            <div data-aos="fade-up" data-aos-delay="300"
+                class="bg-white border p-6 rounded-3xl relative overflow-hidden group">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-bath fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Bathroom Deep Clean</h3>
+                <p class="mt-2 text-slate-600">Sanitization and deep stain removal.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <span class="text-xs bg-orange-100 text-[#F97316] font-semibold px-3 py-1 rounded-full">Coming
+                        Soon</span>
+                    <a href="coming-soon.html"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</a>
+                </div>
+            </div>
+
+            <!-- Laundry & Ironing -->
+            <div data-aos="fade-up" data-aos-delay="400"
+                class="bg-white border p-6 rounded-3xl relative overflow-hidden group">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-shirt fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Laundry &amp; Ironing</h3>
+                <p class="mt-2 text-slate-600">Wash, fold, and perfectly ironed clothes.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <span class="text-xs bg-orange-100 text-[#F97316] font-semibold px-3 py-1 rounded-full">Coming
+                        Soon</span>
+                    <a href="coming-soon.html"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</a>
+                </div>
+            </div>
+
+            <!-- Window Cleaning -->
+            <div data-aos="fade-up" data-aos-delay="500"
+                class="bg-white border p-6 rounded-3xl relative overflow-hidden group">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-spray-can-sparkles fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Window Cleaning</h3>
+                <p class="mt-2 text-slate-600">Crystal clear views inside and out.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <span class="text-xs bg-orange-100 text-[#F97316] font-semibold px-3 py-1 rounded-full">Coming
+                        Soon</span>
+                    <a href="coming-soon.html"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</a>
+                </div>
+            </div>
+
+            <!-- Move In / Move Out -->
+            <div data-aos="fade-up" data-aos-delay="600"
+                class="bg-white border p-6 rounded-3xl relative overflow-hidden group">
+                <div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-[#F97316] rounded-2xl mb-6">
+                    <i class="fa-solid fa-box-open fa-lg"></i>
+                </div>
+                <h3 class="font-semibold text-2xl">Move In / Move Out</h3>
+                <p class="mt-2 text-slate-600">Get your deposit back with our deep clean.</p>
+                <div class="mt-5 flex items-center justify-between">
+                    <span class="text-xs bg-orange-100 text-[#F97316] font-semibold px-3 py-1 rounded-full">Coming
+                        Soon</span>
+                    <a href="coming-soon.html"
+                        class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
+                        Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div id="why-choose-us" class="max-w-screen-xl mx-auto px-6 py-20 border-t border-slate-100">
+        <div data-aos="fade-up" class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Why Choose HomeSparks?</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">We don't just clean, we care for your home with
+                industry-leading standards.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-10">
+            <!-- Trained Professionals -->
+            <div data-aos="fade-up" data-aos-delay="100" class="flex flex-col items-center text-center group">
+                <div
+                    class="w-20 h-20 bg-teal-50 text-[#0E7490] rounded-[2rem] flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-user-shield fa-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Trained Professionals</h3>
+                <p class="text-slate-600 leading-relaxed">Our staff undergoes rigorous training and background
+                    verification to ensure your peace of mind.</p>
+            </div>
+
+            <!-- Flexible Scheduling -->
+            <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col items-center text-center group">
+                <div
+                    class="w-20 h-20 bg-orange-50 text-[#F97316] rounded-[2rem] flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-calendar-check fa-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Flexible Scheduling</h3>
+                <p class="text-slate-600 leading-relaxed">Book services at your convenience - morning, evening, or
+                    weekends to fit your busy life.</p>
+            </div>
+
+            <!-- Satisfaction Guarantee -->
+            <div data-aos="fade-up" data-aos-delay="300" class="flex flex-col items-center text-center group">
+                <div
+                    class="w-20 h-20 bg-green-50 text-green-600 rounded-[2rem] flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-handshake-angle fa-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">100% Satisfaction</h3>
+                <p class="text-slate-600 leading-relaxed">We provide exceptional maid services tailored to your needs
+                    Our professional team ensures your complete satisfaction.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div id="how-it-works" class="bg-white py-20 border-t border-b">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 data-aos="fade-up" class="text-center text-5xl font-bold tracking-tighter mb-12">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div data-aos="zoom-in" data-aos-delay="100" class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto flex items-center justify-center bg-[#0E7490] text-white font-extrabold text-xl rounded-2xl mb-4">
+                        1</div>
+                    <h4 class="font-bold text-xl">Book Your Service</h4>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200" class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto flex items-center justify-center bg-[#0E7490] text-white font-extrabold text-xl rounded-2xl mb-4">
+                        2</div>
+                    <h4 class="font-bold text-xl">Pro Comes To You</h4>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300" class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto flex items-center justify-center bg-[#0E7490] text-white font-extrabold text-xl rounded-2xl mb-4">
+                        3</div>
+                    <h4 class="font-bold text-xl">Enjoy Clean Home</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div id="contact" class="max-w-screen-xl mx-auto px-6 py-20">
+        <div data-aos="fade-up" class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center mb-8">Book Your Service</h2>
+
+            <form id="contact-form" onsubmit="submitContactForm(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Full Name *</label>
+                        <input type="text" id="full-name" required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="+91 XXXXX XXXXX"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email *</label>
+                        <input type="email" id="email" required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Location / Address *</label>
+                        <input type="text" id="location" required placeholder="Your full address or area"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Preferred Date *</label>
+                        <input type="date" id="date" required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Preferred Time *</label>
+                        <select id="time" required class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                            <option value="">Select Time Slot</option>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="01:00 PM">01:00 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="05:00 PM">05:00 PM</option>
+                            <option value="06:00 PM">06:00 PM</option>
+                            <option value="07:00 PM">07:00 PM</option>
+                            <option value="08:00 PM">08:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold mb-2">Select Service *</label>
+                        <select id="service" onchange="handleMainFormServiceChange()" required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                            <option value="">Choose a service</option>
+                            <option>Dish Washing &amp; Kitchen</option>
+                            <option value="coming-soon">Other Services (Coming Soon)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dish Washing Fields -->
+                <div id="main-dishwash-fields" class="hidden mt-6 border-l-4 border-orange-400 pl-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Plan Type</label>
+                            <select id="main-plan-type" onchange="calculateMainFormPrice()"
+                                class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                                <option value="one-day">One Day Plan</option>
+                                <option value="one-month">One Month Plan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Number of People</label>
+                            <input type="number" id="main-people-count" value="2" onchange="calculateMainFormPrice()"
+                                class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Number of Dishes</label>
+                            <input type="number" id="main-dish-count" value="20" onchange="calculateMainFormPrice()"
+                                class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
+                        </div>
+                    </div>
+                    <div class="mt-4 text-[#0E7490]">Estimated Price: <span id="main-price-display"
+                            class="font-bold">₹69</span></div>
+                </div>
+
+                <div class="mt-6">
+                    <label class="block text-sm font-semibold mb-2">Message (Optional)</label>
+                    <textarea id="message" rows="3"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-3xl"></textarea>
+                </div>
+
+                <button type="submit" class="mt-8 w-full py-4 bg-[#F97316] text-white font-bold text-lg rounded-3xl">
+                    Submit Booking Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-x-3 mb-6">
+                        <img src="uploads/upload_1.png" alt="HomeSparks Logo" class="h-12 w-auto">
+                        <div class="flex flex-col">
+                            <span class="logo-font text-2xl font-extrabold tracking-tighter leading-none text-white">
+                                Home<span class="text-[#F97316]">Sparks</span>
+                            </span>
+                            <span
+                                class="text-[0.6rem] font-semibold text-[#F97316] tracking-wider uppercase mt-0.5">Home
+                                Cleaning Services</span>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                        Professional home cleaning services that bring the sparkle back to your space. Trusted by
+                        thousands of happy homes.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#services" class="hover:text-[#F97316] transition-colors">Our Services</a></li>
+                        <li><a href="#how-it-works" class="hover:text-[#F97316] transition-colors">How It Works</a></li>
+                        <li><a href="#contact" class="hover:text-[#F97316] transition-colors">Book a Clean</a></li>
+                        <li><a href="#" class="hover:text-[#F97316] transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Services</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#services" class="hover:text-[#F97316] transition-colors">Dish Washing</a></li>
+                        <li><a href="coming-soon.html" class="hover:text-[#F97316] transition-colors">Deep Cleaning</a>
+                        </li>
+                        <li><a href="coming-soon.html" class="hover:text-[#F97316] transition-colors">Move In/Out</a>
+                        </li>
+                        <li><a href="coming-soon.html" class="hover:text-[#F97316] transition-colors">Window
+                                Cleaning</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Contact Us</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1 text-[#F97316]"></i>
+                            <a href="tel:+918985571372" class="hover:text-white transition-colors">+91 89855 71372</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-brands fa-whatsapp mt-1 text-[#F97316] text-lg"></i>
+                            <a href="https://wa.me/918985571372" target="_blank"
+                                class="hover:text-white transition-colors">+91 89855 71372</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1 text-[#F97316]"></i>
+                            <a href="mailto:homesparkspvt.ltd@gmail.com"
+                                class="hover:text-white transition-colors">homesparkspvt.ltd@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-clock mt-1 text-[#F97316]"></i>
+                            <span>Mon - Sun: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm">© 2026 HomeSparks. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="https://www.facebook.com/share/1QqFNq3nei/" target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/homesparks_jcr?igsh=YXdlY2Jpa3ZvbDI5" target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/home-sparks-private-limited-293098409?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://youtube.com/@homesparks?si=TcpqTSh9y9K3fhGO" target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="https://x.com/homesparksjcr" target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://wa.me/918985571372" target="_blank"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                    <a href="mailto:homesparkspvt.ltd@gmail.com"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        function scrollToContactAndSelect(serviceName) {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                document.getElementById('service').value = serviceName;
+                handleMainFormServiceChange();
+            }, 300);
+        }
+
+        function handleMainFormServiceChange() {
+            const service = document.getElementById('service').value;
+            const fields = document.getElementById('main-dishwash-fields');
+
+            if (service === 'coming-soon') {
+                alert("This service is coming soon!");
+                document.getElementById('service').value = 'Dish Washing & Kitchen';
+                return;
+            }
+
+            if (service.includes('Dish')) {
+                fields.classList.remove('hidden');
+            } else {
+                fields.classList.add('hidden');
+            }
+        }
+
+        function calculateMainFormPrice() {
+            const plan = document.getElementById('main-plan-type').value;
+            const priceEl = document.getElementById('main-price-display');
+
+            if (plan === 'one-month') {
+                priceEl.textContent = '₹4999';
+                return;
+            }
+
+            const people = parseInt(document.getElementById('main-people-count').value) || 0;
+            const dishes = parseInt(document.getElementById('main-dish-count').value) || 0;
+
+            let total = 69;
+            if (people > 3) total += (people - 3) * 75;
+            if (dishes > 25) total += (dishes - 25) * 12;
+
+            priceEl.textContent = '₹' + total;
+        }
+
+        async function submitContactForm(e) {
+            e.preventDefault();
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Submitting...';
+            btn.disabled = true;
+
+            const formData = {
+                fullName: document.getElementById('full-name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                location: document.getElementById('location').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                service: document.getElementById('service').value,
+                planType: document.getElementById('main-plan-type')?.value || '',
+                peopleCount: document.getElementById('main-people-count')?.value || '',
+                dishCount: document.getElementById('main-dish-count')?.value || '',
+                price: document.getElementById('main-price-display')?.textContent || '',
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString()
+            };
+
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAFSLTL8jZW0a1Gijp4g-7O-_u6dVcfHKK0TmWHHHwGWcBZ4pdErPerhxVVguORoxS/exec';
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(formData)
+                });
+
+                // no-cors means response is opaque — we assume success if no network error
+                alert('✅ Thank you! Your booking request has been submitted. We will contact you shortly.');
+                e.target.reset();
+                document.getElementById('main-dishwash-fields').classList.add('hidden');
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('❌ Network error. Please check your internet connection and try again.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+    </script>
+</body>
+
+</html>

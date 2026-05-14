@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeSparks • Professional Home Cleaning Services</title>
-    <link rel="stylesheet" href="tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,15 +29,15 @@
 <body class="tail-container bg-slate-50 text-slate-800">
     <!-- Navbar -->
     <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
-        <div class="max-w-screen-xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-x-3">
-                    <img src="uploads/upload_1.png" alt="HomeSparks Logo" class="h-12 w-auto">
+        <div class="max-w-screen-xl mx-auto px-4 md:px-6">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <div class="flex items-center gap-x-2 md:gap-x-3 shrink-0">
+                    <img src="uploads/upload_1.png" alt="HomeSparks Logo" class="h-8 md:h-12 w-auto">
                     <div class="flex flex-col">
-                        <span class="logo-font text-3xl font-extrabold tracking-tighter leading-none">
+                        <span class="logo-font text-xl md:text-3xl font-extrabold tracking-tighter leading-none">
                             <span class="text-[#0E7490]">Home</span><span class="text-[#F97316]">Sparks</span>
                         </span>
-                        <span class="text-[0.6rem] font-semibold text-[#0E7490] tracking-wider uppercase mt-0.5">Home
+                        <span class="text-[0.45rem] sm:text-[0.5rem] md:text-[0.6rem] font-semibold text-[#0E7490] tracking-wider uppercase mt-0.5 whitespace-nowrap">Home
                             Cleaning Services</span>
                     </div>
                 </div>
@@ -46,9 +46,9 @@
                     <a href="#how-it-works" class="hover:text-[#0E7490]">How It Works</a>
                     <a href="#contact" class="hover:text-[#0E7490]">Contact</a>
                 </div>
-                <div>
+                <div class="shrink-0 ml-1">
                     <a href="#contact"
-                        class="px-6 py-2.5 bg-[#0E7490] text-white text-sm font-semibold rounded-2xl flex items-center gap-x-2">
+                        class="px-3 py-2 md:px-6 md:py-2.5 bg-[#0E7490] text-white text-xs md:text-sm font-semibold rounded-xl md:rounded-2xl flex items-center gap-x-1.5 md:gap-x-2 whitespace-nowrap">
                         <i class="fa-solid fa-calendar-check"></i>
                         <span>Book Now</span>
                     </a>
@@ -60,27 +60,27 @@
     <!-- Hero -->
     <div class="h-[640px] flex items-center relative"
         style="background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.5)), url('images/hero_kitchen.png'); background-size: cover; background-position: center;">
-        <div class="max-w-screen-xl mx-auto px-6 w-full">
-            <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="max-w-screen-xl mx-auto px-4 md:px-6 w-full">
+            <div class="max-w-3xl mx-auto text-center flex flex-col items-center mt-8 md:mt-0">
                 <div data-aos="fade-down"
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-slate-800 text-sm font-semibold mb-6">
+                    class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white text-slate-800 text-xs md:text-sm font-semibold mb-6">
                     <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
                     Rated #1 Home Cleaning in the City
                 </div>
-                <h1 data-aos="fade-up" class="text-white text-6xl md:text-7xl font-extrabold tracking-tighter">Your
+                <h1 data-aos="fade-up" class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-tight">Your
                     home.<br> Sparkling clean.</h1>
-                <p data-aos="fade-up" data-aos-delay="100" class="mt-6 text-lg md:text-xl text-white/90 max-w-2xl">
+                <p data-aos="fade-up" data-aos-delay="100" class="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-white/90 max-w-2xl px-2">
                     Professional home cleaning services that bring the sparkle back to your space. Trusted by 4,800+
                     happy homes.</p>
                 <div data-aos="fade-up" data-aos-delay="200"
-                    class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-4 sm:px-0">
                     <a href="#contact"
-                        class="px-8 py-4 bg-[#F97316] hover:bg-orange-600 text-white font-semibold rounded-full inline-flex items-center justify-center gap-2 transition-all">
+                        class="w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-[#F97316] hover:bg-orange-600 text-white font-semibold rounded-full inline-flex items-center justify-center gap-2 transition-all">
                         Book Your Cleaning
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                     <a href="#how-it-works"
-                        class="px-8 py-4 bg-white hover:bg-slate-50 text-[#0E7490] font-semibold rounded-full flex items-center justify-center transition-all">
+                        class="w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-white hover:bg-slate-50 text-[#0E7490] font-semibold rounded-full flex items-center justify-center transition-all">
                         See how it works
                     </a>
                 </div>
@@ -89,10 +89,10 @@
     </div>
 
     <!-- Services -->
-    <div id="services" class="max-w-screen-xl mx-auto px-6 pt-20 pb-16">
-        <div data-aos="fade-up" class="text-center mb-12">
-            <div class="text-[#F97316] font-bold text-sm tracking-[1.5px]">WHAT WE CLEAN</div>
-            <h2 class="text-5xl font-bold tracking-tighter">Our Services</h2>
+    <div id="services" class="max-w-screen-xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-16">
+        <div data-aos="fade-up" class="text-center mb-10 md:mb-12">
+            <div class="text-[#F97316] font-bold text-xs md:text-sm tracking-[1.5px] mb-2">WHAT WE CLEAN</div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">Our Services</h2>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -199,9 +199,9 @@
     </div>
 
     <!-- Why Choose Us -->
-    <div id="why-choose-us" class="max-w-screen-xl mx-auto px-6 py-20 border-t border-slate-100">
-        <div data-aos="fade-up" class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Why Choose HomeSparks?</h2>
+    <div id="why-choose-us" class="max-w-screen-xl mx-auto px-4 md:px-6 py-16 md:py-20 border-t border-slate-100">
+        <div data-aos="fade-up" class="text-center mb-12 md:mb-16">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">Why Choose HomeSparks?</h2>
             <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">We don't just clean, we care for your home with
                 industry-leading standards.</p>
         </div>
@@ -243,9 +243,9 @@
     </div>
 
     <!-- How It Works -->
-    <div id="how-it-works" class="bg-white py-20 border-t border-b">
-        <div class="max-w-screen-xl mx-auto px-6">
-            <h2 data-aos="fade-up" class="text-center text-5xl font-bold tracking-tighter mb-12">How It Works</h2>
+    <div id="how-it-works" class="bg-white py-16 md:py-20 border-t border-b">
+        <div class="max-w-screen-xl mx-auto px-4 md:px-6">
+            <h2 data-aos="fade-up" class="text-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-10 md:mb-12">How It Works</h2>
             <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div data-aos="zoom-in" data-aos-delay="100" class="text-center">
                     <div
@@ -270,9 +270,9 @@
     </div>
 
     <!-- Contact Form -->
-    <div id="contact" class="max-w-screen-xl mx-auto px-6 py-20">
-        <div data-aos="fade-up" class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Book Your Service</h2>
+    <div id="contact" class="max-w-screen-xl mx-auto px-4 md:px-6 py-16 md:py-20">
+        <div data-aos="fade-up" class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Book Your Service</h2>
 
             <form id="contact-form" onsubmit="submitContactForm(event)">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -440,8 +440,8 @@
             </div>
 
             <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm">© 2026 HomeSparks. All rights reserved.</p>
-                <div class="flex gap-4">
+                <p class="text-sm text-center md:text-left">© 2026 HomeSparks. All rights reserved.</p>
+                <div class="flex gap-3 sm:gap-4 flex-wrap justify-center">
                     <a href="https://www.facebook.com/share/1QqFNq3nei/" target="_blank"
                         class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#F97316] hover:text-white transition-colors">
                         <i class="fa-brands fa-facebook-f"></i>

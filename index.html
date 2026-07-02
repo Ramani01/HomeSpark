@@ -357,6 +357,8 @@
                         class="w-full px-4 py-3 border border-slate-300 rounded-3xl"></textarea>
                 </div>
 
+                <div id="form-status-message" class="hidden mt-6 p-4 rounded-2xl font-semibold text-center transition-all"></div>
+
                 <button type="submit" class="mt-8 w-full py-4 bg-[#F97316] text-white font-bold text-lg rounded-3xl">
                     Submit Booking Request
                 </button>
@@ -590,22 +592,22 @@
 
             const formData = {
                 fullName: document.getElementById('full-name').value,
-                phone: document.getElementById('phone').value,
+                phoneNumber: document.getElementById('phone').value,
                 email: document.getElementById('email').value,
                 location: document.getElementById('location').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('time').value,
-                service: document.getElementById('service').value,
+                preferredDate: document.getElementById('date').value,
+                preferredTime: document.getElementById('time').value,
+                selectService: document.getElementById('service').value,
                 planType: document.getElementById('main-plan-type')?.value || '',
-                peopleCount: '',
-                dishCount: '',
+                numberOfPeople: '',
+                numberOfDishes: '',
                 hoursCount: document.getElementById('main-hours-count')?.value || '',
                 price: document.getElementById('main-price-display')?.textContent || '',
                 message: document.getElementById('message').value,
                 timestamp: new Date().toLocaleString()
             };
 
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAFSLTL8jZW0a1Gijp4g-7O-_u6dVcfHKK0TmWHHHwGWcBZ4pdErPerhxVVguORoxS/exec';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBUeoA3U8HQvODdsvfyxgS3z8i3tadL53w6jzbp0M-zxsPNQyKlgvtagAQhBJwtV_L/exec';
 
             try {
                 await fetch(SCRIPT_URL, {
@@ -616,12 +618,12 @@
                 });
 
                 // no-cors means response is opaque — we assume success if no network error
-                alert('✅ Thank you! Your booking request has been submitted. We will contact you shortly.');
-                e.target.reset();
-                document.getElementById('main-dishwash-fields').classList.add('hidden');
+                window.location.href = 'thank-you.html';
             } catch (error) {
                 console.error('Submission error:', error);
-                alert('❌ Network error. Please check your internet connection and try again.');
+                const statusDiv = document.getElementById('form-status-message');
+                statusDiv.textContent = '❌ Network error. Please check your internet connection and try again.';
+                statusDiv.className = 'mt-6 p-4 rounded-2xl font-semibold text-center transition-all bg-red-50 text-red-700 border border-red-200 block';
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;

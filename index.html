@@ -392,6 +392,22 @@
                             class="font-bold">₹149</span></div>
                 </div>
 
+                <!-- Home Size Estimator Fields (Full House & Move In/Out) -->
+                <div id="main-houseclean-fields" class="hidden mt-6 border-l-4 border-[#0E7490] bg-[#0E7490]/5 p-4 rounded-r-2xl">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-800">Select Home Size *</label>
+                        <select id="main-home-size" onchange="calculateMainFormPrice()"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-2xl bg-white font-medium">
+                            <option value="1 BHK (₹2,999)" data-price="2999">1 BHK — ₹2,999</option>
+                            <option value="2 BHK (₹3,999)" data-price="3999">2 BHK — ₹3,999</option>
+                            <option value="3 BHK (₹4,999)" data-price="4999">3 BHK — ₹4,999</option>
+                            <option value="4 BHK / Villa (₹6,999)" data-price="6999">4 BHK / Villa — ₹6,999</option>
+                        </select>
+                    </div>
+                    <div class="mt-4 text-[#0E7490] font-semibold text-base">Estimated Price: <span id="house-price-display"
+                            class="font-bold text-xl text-[#0E7490]">₹2,999</span></div>
+                </div>
+
                 <div class="mt-6">
                     <label class="block text-sm font-semibold mb-2">Message (Optional)</label>
                     <textarea id="message" rows="3"
@@ -526,51 +542,70 @@
 
         function handleMainFormServiceChange() {
             const service = document.getElementById('service').value;
-            const fields = document.getElementById('main-dishwash-fields');
+            const dishFields = document.getElementById('main-dishwash-fields');
+            const houseFields = document.getElementById('main-houseclean-fields');
 
             if (service.includes('Dish') || service.includes('Cooking')) {
-                fields.classList.remove('hidden');
-                calculateMainFormPrice();
+                dishFields?.classList.remove('hidden');
+                houseFields?.classList.add('hidden');
+            } else if (service.includes('House') || service.includes('Move')) {
+                dishFields?.classList.add('hidden');
+                houseFields?.classList.remove('hidden');
             } else {
-                fields.classList.add('hidden');
+                dishFields?.classList.add('hidden');
+                houseFields?.classList.add('hidden');
             }
+            calculateMainFormPrice();
         }
 
         function calculateMainFormPrice() {
-            const plan = document.getElementById('main-plan-type').value;
-            const priceEl = document.getElementById('main-price-display');
-            const hoursWrapper = document.getElementById('main-hours-wrapper');
-            const selectedDate = document.getElementById('date').value;
-            const selectedTime = document.getElementById('time').value;
             const service = document.getElementById('service')?.value || '';
+            const dishPriceEl = document.getElementById('main-price-display');
+            const housePriceEl = document.getElementById('house-price-display');
 
-            // Free Promo Slot Check: 12th July 2026 between 9:00 AM and 1:00 PM
-            const isPromoDate = (selectedDate === '2026-07-12');
-            const promoSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM'];
-            const isPromoTime = promoSlots.includes(selectedTime);
+            if (service.includes('House') || service.includes('Move')) {
+                const homeSizeSelect = document.getElementById('main-home-size');
+                const selectedOption = homeSizeSelect?.options[homeSizeSelect.selectedIndex];
+                const rawPrice = selectedOption?.getAttribute('data-price') || '2999';
+                const formattedPrice = '₹' + Number(rawPrice).toLocaleString('en-IN');
+                if (housePriceEl) housePriceEl.textContent = formattedPrice;
+                return;
+            }
 
-            if (isPromoDate && isPromoTime) {
-                priceEl.textContent = '₹0 (Free Promo Slot!)';
-                if (plan === 'one-month') {
-                    if (hoursWrapper) hoursWrapper.classList.add('hidden');
-                } else {
-                    if (hoursWrapper) hoursWrapper.classList.remove('hidden');
+            if (service.includes('Dish') || service.includes('Cooking')) {
+                const plan = document.getElementById('main-plan-type').value;
+                const hoursWrapper = document.getElementById('main-hours-wrapper');
+                const selectedDate = document.getElementById('date').value;
+                const selectedTime = document.getElementById('time').value;
+
+                // Free Promo Slot Check: 12th July 2026 between 9:00 AM and 1:00 PM
+                const isPromoDate = (selectedDate === '2026-07-12');
+                const promoSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM'];
+                const isPromoTime = promoSlots.includes(selectedTime);
+
+                if (isPromoDate && isPromoTime) {
+                    if (dishPriceEl) dishPriceEl.textContent = '₹0 (Free Promo Slot!)';
+                    if (plan === 'one-month') {
+                        if (hoursWrapper) hoursWrapper.classList.add('hidden');
+                    } else {
+                        if (hoursWrapper) hoursWrapper.classList.remove('hidden');
+                    }
+                    return;
                 }
-                return;
+
+                if (plan === 'one-month') {
+                    if (dishPriceEl) dishPriceEl.textContent = '₹4999';
+                    if (hoursWrapper) hoursWrapper.classList.add('hidden');
+                    return;
+                }
+
+                if (hoursWrapper) hoursWrapper.classList.remove('hidden');
+                const hours = parseInt(document.getElementById('main-hours-count').value) || 1;
+                const hourlyRate = service.includes('Cooking') ? 199 : 149;
+                const total = hours * hourlyRate;
+
+                if (dishPriceEl) dishPriceEl.textContent = '₹' + total;
             }
-
-            if (plan === 'one-month') {
-                priceEl.textContent = '₹4999';
-                if (hoursWrapper) hoursWrapper.classList.add('hidden');
-                return;
-            }
-
-            if (hoursWrapper) hoursWrapper.classList.remove('hidden');
-            const hours = parseInt(document.getElementById('main-hours-count').value) || 1;
-            const hourlyRate = service.includes('Cooking') ? 199 : 149;
-            const total = hours * hourlyRate;
-
-            priceEl.textContent = '₹' + total;
         }
 
         async function submitContactForm(e) {
@@ -581,6 +616,14 @@
             btn.textContent = 'Submitting...';
             btn.disabled = true;
 
+            const service = document.getElementById('service').value;
+            let finalPrice = '';
+            if (service.includes('House') || service.includes('Move')) {
+                finalPrice = document.getElementById('house-price-display')?.textContent || '';
+            } else if (service.includes('Dish') || service.includes('Cooking')) {
+                finalPrice = document.getElementById('main-price-display')?.textContent || '';
+            }
+
             const formData = {
                 fullName: document.getElementById('full-name').value,
                 phoneNumber: document.getElementById('phone').value,
@@ -588,12 +631,13 @@
                 location: document.getElementById('location').value,
                 preferredDate: document.getElementById('date').value,
                 preferredTime: document.getElementById('time').value,
-                selectService: document.getElementById('service').value,
+                selectService: service,
                 planType: document.getElementById('main-plan-type')?.value || '',
+                homeSize: document.getElementById('main-home-size')?.value || '',
                 numberOfPeople: '',
                 numberOfDishes: '',
                 hoursCount: document.getElementById('main-hours-count')?.value || '',
-                price: document.getElementById('main-price-display')?.textContent || '',
+                price: finalPrice,
                 message: document.getElementById('message').value,
                 timestamp: new Date().toLocaleString()
             };

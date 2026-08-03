@@ -7,7 +7,7 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const SECRET_TOKEN = process.env.SECRET_TOKEN || 'my_super_secret_token_123';
+const SECRET_TOKEN = process.env.SECRET_TOKEN || 'MyPrivateKey99';
 const TARGET_NUMBERS = (process.env.TARGET_NUMBERS || '')
   .split(',')
   .map(num => num.trim())
@@ -129,10 +129,12 @@ app.get('/health', (req, res) => {
 // Webhook Endpoint for Google Form Submissions
 app.post('/api/webhook/google-form', async (req, res) => {
   try {
+    require('dotenv').config({ override: true });
+    const activeSecretToken = process.env.SECRET_TOKEN || 'MyPrivateKey99';
     const authHeader = req.headers['x-secret-token'] || req.query.token;
     const bodyToken = req.body.secretToken;
 
-    if (authHeader !== SECRET_TOKEN && bodyToken !== SECRET_TOKEN) {
+    if (authHeader !== activeSecretToken && bodyToken !== activeSecretToken) {
       console.warn('⚠️ Unauthorized webhook attempt with invalid secret token');
       return res.status(401).json({ success: false, error: 'Unauthorized: Invalid secret token' });
     }

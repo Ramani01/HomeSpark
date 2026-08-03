@@ -19,7 +19,7 @@
 
 // CONFIGURATION: Set your webhook URL and secret token here
 const WEBHOOK_URL = "https://pounce-matted-earthworm.ngrok-free.dev/api/webhook/google-form";
-const SECRET_TOKEN = "my_super_secret_token_123";
+const SECRET_TOKEN = "MyPrivateKey99";
 
 /**
  * Trigger function called automatically on Form Submit

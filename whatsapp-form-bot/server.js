@@ -238,6 +238,17 @@ app.post('/api/webhook/google-form', async (req, res) => {
   }
 });
 
+// Keep-alive self-ping every 5 minutes so Render cloud server never sleeps
+const SERVER_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+setInterval(() => {
+  try {
+    const clientHttp = SERVER_URL.startsWith('https') ? require('https') : require('http');
+    clientHttp.get(`${SERVER_URL}/health`, (res) => {
+      console.log('⏰ Keep-alive ping sent to keep server awake.');
+    }).on('error', () => {});
+  } catch (e) {}
+}, 5 * 60 * 1000);
+
 // Start Express Server
 app.listen(PORT, () => {
   console.log(`🌐 Server running on http://localhost:${PORT}`);

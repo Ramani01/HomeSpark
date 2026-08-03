@@ -18,7 +18,7 @@
  */
 
 // CONFIGURATION: Set your webhook URL and secret token here
-const WEBHOOK_URL = "https://pounce-matted-earthworm.ngrok-free.dev/api/webhook/google-form";
+const WEBHOOK_URL = "https://whatsapp-form-bot-cjbe.onrender.com/api/webhook/google-form";
 const SECRET_TOKEN = "MyPrivateKey99";
 
 /**

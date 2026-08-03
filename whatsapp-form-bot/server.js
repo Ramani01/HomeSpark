@@ -8,7 +8,8 @@ const {
   default: makeWASocket,
   useMultiFileAuthState,
   DisconnectReason,
-  fetchLatestBaileysVersion
+  fetchLatestBaileysVersion,
+  Browsers
 } = require('@whiskeysockets/baileys');
 
 const app = express();
@@ -32,7 +33,10 @@ async function startBaileys() {
     version,
     auth: state,
     logger: pino({ level: 'silent' }),
-    printQRInTerminal: false
+    browser: Browsers.ubuntu('Chrome'),
+    printQRInTerminal: false,
+    syncFullHistory: false,
+    generateHighQualityLinkPreview: false
   });
 
   sock.ev.on('creds.update', saveCreds);

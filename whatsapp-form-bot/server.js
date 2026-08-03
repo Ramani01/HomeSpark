@@ -1,120 +1,79 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 const qrcodeTerminal = require('qrcode-terminal');
 const QRCode = require('qrcode');
-const puppeteer = require('puppeteer');
-const { Client, LocalAuth } = require('whatsapp-web.js');
+const pino = require('pino');
+const {
+  default: makeWASocket,
+  useMultiFileAuthState,
+  DisconnectReason,
+  fetchLatestBaileysVersion
+} = require('@whiskeysockets/baileys');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const SECRET_TOKEN = process.env.SECRET_TOKEN || 'MyPrivateKey99';
-const TARGET_NUMBERS = (process.env.TARGET_NUMBERS || '')
-  .split(',')
-  .map(num => num.trim())
-  .filter(Boolean);
 
 app.use(cors());
 app.use(express.json());
 
 let isReady = false;
 let qrCodeDataUrl = null;
+let sock = null;
 
-// Find Chrome binary in local .cache or system fallback
-function findChromeBinary(dir) {
-  try {
-    if (!fs.existsSync(dir)) return null;
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-      const fullPath = path.join(dir, file);
-      const stat = fs.statSync(fullPath);
-      if (stat.isDirectory()) {
-        const found = findChromeBinary(fullPath);
-        if (found) return found;
-      } else if (file === 'chrome' || file === 'chrome.exe') {
-        return fullPath;
-      }
-    }
-  } catch (e) {}
-  return null;
-}
+async function startBaileys() {
+  console.log('🚀 Initializing Lightweight Baileys WhatsApp Client (30MB RAM)...');
+  
+  const { state, saveCreds } = await useMultiFileAuthState('baileys_auth_info');
+  const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: [2, 3000, 1015901307] }));
 
-function getChromePath() {
-  if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
-  const localCache = path.join(__dirname, '.cache');
-  const foundLocal = findChromeBinary(localCache);
-  if (foundLocal) return foundLocal;
-  try {
-    return puppeteer.executablePath();
-  } catch (e) {
-    return undefined;
-  }
-}
-
-// Initialize WhatsApp Web Client
-console.log('🚀 Initializing WhatsApp Web Client...');
-
-const chromePath = getChromePath();
-console.log('📍 Resolved Chrome Binary Path:', chromePath || 'Default System Chrome');
-
-const clientOptions = {
-  authStrategy: new LocalAuth({ clientId: 'GOOGLE_FORM_BOT' }),
-  puppeteer: {
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
-      '--disable-gpu'
-    ]
-  }
-};
-
-if (chromePath) {
-  clientOptions.puppeteer.executablePath = chromePath;
-}
-
-const client = new Client(clientOptions);
-
-// QR Code Event - Generated instantly
-client.on('qr', (qr) => {
-  console.log('\n==================================================');
-  console.log('📱 SCAN THIS QR CODE WITH YOUR WHATSAPP PHONE:');
-  console.log('==================================================\n');
-  qrcodeTerminal.generate(qr, { small: true });
-  console.log('👉 Or open the /qr page in your browser!');
-  console.log('==================================================\n');
-
-  QRCode.toDataURL(qr, (err, url) => {
-    if (!err) qrCodeDataUrl = url;
+  sock = makeWASocket({
+    version,
+    auth: state,
+    logger: pino({ level: 'silent' }),
+    printQRInTerminal: false
   });
-});
 
-// Authenticated Event
-client.on('authenticated', () => {
-  console.log('🔑 WhatsApp Authenticated Successfully!');
-});
+  sock.ev.on('creds.update', saveCreds);
 
-// Ready Event
-client.on('ready', () => {
-  isReady = true;
-  qrCodeDataUrl = null;
-  console.log('✅ WHATSAPP BOT IS CONNECTED AND READY!');
-});
+  sock.ev.on('connection.update', (update) => {
+    const { connection, lastDisconnect, qr } = update;
 
-client.on('disconnected', (reason) => {
-  isReady = false;
-  console.warn('⚠️ WhatsApp Disconnected:', reason);
-});
+    if (qr) {
+      console.log('\n==================================================');
+      console.log('📱 SCAN THIS QR CODE WITH YOUR WHATSAPP PHONE:');
+      console.log('==================================================\n');
+      qrcodeTerminal.generate(qr, { small: true });
+      console.log('👉 Or open the /qr page in your browser!');
+      console.log('==================================================\n');
 
-client.initialize();
+      QRCode.toDataURL(qr, (err, url) => {
+        if (!err) qrCodeDataUrl = url;
+      });
+    }
 
-// QR Code Page Endpoint for browser viewing
+    if (connection === 'close') {
+      isReady = false;
+      const statusCode = (lastDisconnect?.error)?.output?.statusCode;
+      const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
+      console.log('⚠️ Connection closed due to', lastDisconnect?.error?.message || 'Disconnect', ', reconnecting:', shouldReconnect);
+      if (shouldReconnect) {
+        setTimeout(startBaileys, 3000);
+      } else {
+        console.log('❌ Logged out from WhatsApp. Clear auth folder to re-scan.');
+      }
+    } else if (connection === 'open') {
+      isReady = true;
+      qrCodeDataUrl = null;
+      console.log('✅ WHATSAPP BOT IS CONNECTED AND READY! (30MB Lightweight Engine)');
+    }
+  });
+}
+
+startBaileys();
+
+// Visual QR Code Page for browser viewing
 app.get('/qr', (req, res) => {
   if (isReady) {
     return res.send(`
@@ -122,7 +81,7 @@ app.get('/qr', (req, res) => {
         <body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; background:#f0f2f5;">
           <div style="background:white; padding:40px; border-radius:15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align:center;">
             <h1 style="color:#25D366; font-size:32px;">✅ WhatsApp Connected & Ready!</h1>
-            <p style="color:#555; font-size:18px;">Your bot is logged in and ready to send Google Form notifications.</p>
+            <p style="color:#555; font-size:18px;">Lightweight 30MB Baileys Bot is active 24/7 in the Cloud.</p>
           </div>
         </body>
       </html>
@@ -135,9 +94,9 @@ app.get('/qr', (req, res) => {
         <body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; background:#f0f2f5;">
           <div style="background:white; padding:40px; border-radius:15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align:center;">
             <h2>⏳ Generating QR Code...</h2>
-            <p>Please wait 3-5 seconds while WhatsApp initializes.</p>
+            <p>Please wait 1-2 seconds while Baileys initializes.</p>
           </div>
-          <script>setTimeout(() => location.reload(), 3000);</script>
+          <script>setTimeout(() => location.reload(), 2000);</script>
         </body>
       </html>
     `);
@@ -153,7 +112,7 @@ app.get('/qr', (req, res) => {
           <img src="${qrCodeDataUrl}" style="width:280px; height:280px; margin:15px 0; border:4px solid #25D366; border-radius:10px; padding:10px;" />
           <p style="color:#888; font-size:12px;">Auto-reloads until connected...</p>
         </div>
-        <script>setTimeout(() => location.reload(), 4000);</script>
+        <script>setTimeout(() => location.reload(), 3000);</script>
       </body>
     </html>
   `);
@@ -164,6 +123,7 @@ app.get('/health', (req, res) => {
   res.json({
     status: 'online',
     whatsappConnected: isReady,
+    engine: 'Baileys Lightweight 30MB',
     timestamp: new Date().toISOString()
   });
 });
@@ -181,7 +141,7 @@ app.post('/api/webhook/google-form', async (req, res) => {
       return res.status(401).json({ success: false, error: 'Unauthorized: Invalid secret token' });
     }
 
-    if (!isReady) {
+    if (!isReady || !sock) {
       console.error('❌ Webhook received but WhatsApp client is not connected yet.');
       return res.status(503).json({ success: false, error: 'WhatsApp client is not connected. Scan QR code at /qr' });
     }
@@ -202,7 +162,7 @@ app.post('/api/webhook/google-form', async (req, res) => {
       message += `• *${item.question || `Question ${index + 1}`}:* ${item.answer || 'N/A'}\n`;
     });
 
-    message += `\n⚡ *Automated notification via WhatsApp Web*`;
+    message += `\n⚡ *Automated notification via 24/7 Cloud Bot*`;
 
     const targetNumbers = (process.env.TARGET_NUMBERS || '')
       .split(',')
@@ -213,9 +173,9 @@ app.post('/api/webhook/google-form', async (req, res) => {
 
     const sendPromises = targetNumbers.map(async (number) => {
       const cleanNum = number.replace(/[^0-9]/g, '');
-      const formattedNum = `${cleanNum}@c.us`;
+      const formattedNum = `${cleanNum}@s.whatsapp.net`;
       try {
-        const result = await client.sendMessage(formattedNum, message);
+        await sock.sendMessage(formattedNum, { text: message });
         console.log(`✅ Message sent to ${formattedNum}: SUCCESS`);
         return { number: formattedNum, status: 'success' };
       } catch (sendErr) {

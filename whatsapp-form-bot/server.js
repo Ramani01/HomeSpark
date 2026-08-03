@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 const qrcodeTerminal = require('qrcode-terminal');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer');
@@ -20,16 +22,42 @@ app.use(express.json());
 let isReady = false;
 let qrCodeDataUrl = null;
 
+// Find Chrome binary in local .cache or system fallback
+function findChromeBinary(dir) {
+  try {
+    if (!fs.existsSync(dir)) return null;
+    const files = fs.readdirSync(dir);
+    for (const file of files) {
+      const fullPath = path.join(dir, file);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        const found = findChromeBinary(fullPath);
+        if (found) return found;
+      } else if (file === 'chrome' || file === 'chrome.exe') {
+        return fullPath;
+      }
+    }
+  } catch (e) {}
+  return null;
+}
+
+function getChromePath() {
+  if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
+  const localCache = path.join(__dirname, '.cache');
+  const foundLocal = findChromeBinary(localCache);
+  if (foundLocal) return foundLocal;
+  try {
+    return puppeteer.executablePath();
+  } catch (e) {
+    return undefined;
+  }
+}
+
 // Initialize WhatsApp Web Client
 console.log('🚀 Initializing WhatsApp Web Client...');
 
-let puppeteerExecutablePath = undefined;
-try {
-  puppeteerExecutablePath = process.env.CHROME_PATH || puppeteer.executablePath();
-  console.log('📍 Using Chrome Executable Path:', puppeteerExecutablePath);
-} catch (e) {
-  console.warn('⚠️ Could not resolve custom Chrome executable path, falling back to default.');
-}
+const chromePath = getChromePath();
+console.log('📍 Resolved Chrome Binary Path:', chromePath || 'Default System Chrome');
 
 const clientOptions = {
   authStrategy: new LocalAuth({ clientId: 'GOOGLE_FORM_BOT' }),
@@ -47,8 +75,8 @@ const clientOptions = {
   }
 };
 
-if (puppeteerExecutablePath) {
-  clientOptions.puppeteer.executablePath = puppeteerExecutablePath;
+if (chromePath) {
+  clientOptions.puppeteer.executablePath = chromePath;
 }
 
 const client = new Client(clientOptions);

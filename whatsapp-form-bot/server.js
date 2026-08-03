@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const qrcodeTerminal = require('qrcode-terminal');
 const QRCode = require('qrcode');
+const puppeteer = require('puppeteer');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const app = express();
@@ -22,7 +23,15 @@ let qrCodeDataUrl = null;
 // Initialize WhatsApp Web Client
 console.log('🚀 Initializing WhatsApp Web Client...');
 
-const client = new Client({
+let puppeteerExecutablePath = undefined;
+try {
+  puppeteerExecutablePath = process.env.CHROME_PATH || puppeteer.executablePath();
+  console.log('📍 Using Chrome Executable Path:', puppeteerExecutablePath);
+} catch (e) {
+  console.warn('⚠️ Could not resolve custom Chrome executable path, falling back to default.');
+}
+
+const clientOptions = {
   authStrategy: new LocalAuth({ clientId: 'GOOGLE_FORM_BOT' }),
   puppeteer: {
     headless: true,
@@ -36,7 +45,13 @@ const client = new Client({
       '--disable-gpu'
     ]
   }
-});
+};
+
+if (puppeteerExecutablePath) {
+  clientOptions.puppeteer.executablePath = puppeteerExecutablePath;
+}
+
+const client = new Client(clientOptions);
 
 // QR Code Event - Generated instantly
 client.on('qr', (qr) => {
@@ -44,10 +59,9 @@ client.on('qr', (qr) => {
   console.log('📱 SCAN THIS QR CODE WITH YOUR WHATSAPP PHONE:');
   console.log('==================================================\n');
   qrcodeTerminal.generate(qr, { small: true });
-  console.log('👉 Or open http://localhost:5000/qr in your browser!');
+  console.log('👉 Or open the /qr page in your browser!');
   console.log('==================================================\n');
 
-  // Convert to Data URL for browser display
   QRCode.toDataURL(qr, (err, url) => {
     if (!err) qrCodeDataUrl = url;
   });
@@ -141,7 +155,7 @@ app.post('/api/webhook/google-form', async (req, res) => {
 
     if (!isReady) {
       console.error('❌ Webhook received but WhatsApp client is not connected yet.');
-      return res.status(503).json({ success: false, error: 'WhatsApp client is not connected. Scan QR code at http://localhost:5000/qr' });
+      return res.status(503).json({ success: false, error: 'WhatsApp client is not connected. Scan QR code at /qr' });
     }
 
     const { formTitle, timestamp, responses } = req.body;
@@ -162,7 +176,6 @@ app.post('/api/webhook/google-form', async (req, res) => {
 
     message += `\n⚡ *Automated notification via WhatsApp Web*`;
 
-    require('dotenv').config({ override: true });
     const targetNumbers = (process.env.TARGET_NUMBERS || '')
       .split(',')
       .map(num => num.trim())

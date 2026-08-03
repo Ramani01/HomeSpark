@@ -1,0 +1,20 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# OpenWA / WhatsApp Sessions & Chrome Data
+_sessions/
+_IGNORE_GOOGLE_FORM_BOT/
+tokens/
+*.session
+*.json-session
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

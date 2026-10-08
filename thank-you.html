@@ -285,18 +285,48 @@
             document.getElementById("footerRatingText").innerText = footerRatingTexts[rating];
         }
 
-        function submitFooterRating() {
+        async function submitFooterRating() {
             if (currentFooterRating === 0) {
                 alert("Please select a star rating first!");
                 return;
             }
-            const successMsg = document.getElementById("footerRatingSuccess");
+
             const feedbackInput = document.getElementById("footerFeedbackText");
-            if (successMsg) {
-                successMsg.classList.remove("hidden");
+            const feedbackText = feedbackInput ? feedbackInput.value.trim() : "";
+            const successMsg = document.getElementById("footerRatingSuccess");
+            const submitBtn = document.querySelector("#footerFeedbackText + button") || document.querySelector("button[onclick='submitFooterRating()']");
+            
+            const originalText = submitBtn ? submitBtn.innerHTML : "";
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[0.7rem]"></i> Submitting...`;
             }
-            if (feedbackInput) {
-                feedbackInput.value = "";
+
+            const payload = {
+                type: "feedback",
+                rating: currentFooterRating,
+                feedbackText: feedbackText,
+                pageSource: "Thank-You Page Footer"
+            };
+
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxzLnx7AiBzigDzEKmMwJXfkY_Raq8LXykOu35JU1Z80vXjQmH7iWKv0tg1EjbNaWbv/exec';
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload)
+                });
+                if (successMsg) successMsg.classList.remove("hidden");
+                if (feedbackInput) feedbackInput.value = "";
+            } catch (error) {
+                console.error("Error submitting feedback:", error);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
             }
         }
 

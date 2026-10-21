@@ -150,7 +150,7 @@
                 <h3 class="font-semibold text-2xl">Dish Washing &amp; Kitchen</h3>
                 <p class="mt-2 text-slate-600">Flexible plans with professional cleaning.</p>
                 <div class="mt-5 flex items-center justify-between">
-                    <div class="font-bold text-xl">Starts at ₹149/hr</div>
+                    <div class="font-bold text-xl">Starts at ₹499/hr</div>
                     <button onclick="scrollToContactAndSelect('Dish Washing &amp; Kitchen')"
                         class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
                         Now</button>
@@ -384,7 +384,7 @@
                         <select id="service" onchange="handleMainFormServiceChange()" required
                             class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
                             <option value="">Choose a service</option>
-                            <option value="Dish Washing &amp; Kitchen">Dish Washing &amp; Kitchen (₹149/hr)</option>
+                            <option value="Dish Washing &amp; Kitchen">Dish Washing &amp; Kitchen (₹499/hr)</option>
                             <option value="Cooking &amp; Meal Prep">Cooking &amp; Meal Prep (₹199/hr)</option>
                             <option value="Full House Cleaning">Full House Cleaning (Starts at ₹2999)</option>
                             <option value="Bathroom Deep Clean">Bathroom Deep Clean (₹499/unit)</option>
@@ -402,7 +402,7 @@
                             <label class="block text-sm font-semibold mb-2">Plan Type</label>
                             <select id="main-plan-type" onchange="calculateMainFormPrice()"
                                 class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
-                                <option value="one-day">One Day Plan (₹149/hr)</option>
+                                <option value="one-day">One Day Plan (₹499/hr)</option>
                                 <option value="one-month">One Month Plan (₹4999 flat)</option>
                             </select>
                         </div>
@@ -414,7 +414,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-[#0E7490]">Estimated Price: <span id="main-price-display"
-                            class="font-bold">₹149</span></div>
+                            class="font-bold">₹499</span></div>
                 </div>
 
                 <!-- Home Size Estimator Fields (Full House & Move In/Out) -->
@@ -954,7 +954,7 @@
 
                 if (hoursWrapper) hoursWrapper.classList.remove('hidden');
                 const hours = parseInt(document.getElementById('main-hours-count').value) || 1;
-                const hourlyRate = service.includes('Cooking') ? 199 : 149;
+                const hourlyRate = service.includes('Cooking') ? 199 : 499;
                 const total = hours * hourlyRate;
 
                 if (dishPriceEl) dishPriceEl.textContent = '₹' + total;

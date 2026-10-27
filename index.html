@@ -27,8 +27,8 @@
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "INR",
-        "lowPrice": "199",
-        "highPrice": "2999"
+        "lowPrice": "499",
+        "highPrice": "5999"
       }
     }
     </script>
@@ -246,7 +246,7 @@
                 <h3 class="font-semibold text-2xl">Cooking &amp; Meal Prep</h3>
                 <p class="mt-2 text-slate-600">Fresh, hygienic home-cooked meals prepared in your kitchen.</p>
                 <div class="mt-5 flex items-center justify-between">
-                    <div class="font-bold text-xl"> Starts at ₹199/hr</div>
+                    <div class="font-bold text-xl">Starts at ₹5999/month</div>
                     <button onclick="scrollToContactAndSelect('Cooking &amp; Meal Prep')"
                         class="px-5 py-2 text-sm font-semibold border border-[#0E7490] text-[#0E7490] hover:bg-[#0E7490] hover:text-white rounded-2xl transition-all">Book
                         Now</button>
@@ -385,7 +385,7 @@
                             class="w-full px-4 py-3 border border-slate-300 rounded-2xl">
                             <option value="">Choose a service</option>
                             <option value="Dish Washing &amp; Kitchen">Dish Washing &amp; Kitchen (₹499/hr)</option>
-                            <option value="Cooking &amp; Meal Prep">Cooking &amp; Meal Prep (₹199/hr)</option>
+                            <option value="Cooking &amp; Meal Prep">Cooking &amp; Meal Prep (₹5999/month)</option>
                             <option value="Full House Cleaning">Full House Cleaning (Starts at ₹2999)</option>
                             <option value="Bathroom Deep Clean">Bathroom Deep Clean (₹499/unit)</option>
                             <option value="Laundry &amp; Ironing">Laundry &amp; Ironing (₹499/hr)</option>
@@ -897,10 +897,27 @@
             const service = document.getElementById('service').value;
             const dishFields = document.getElementById('main-dishwash-fields');
             const houseFields = document.getElementById('main-houseclean-fields');
+            const planSelect = document.getElementById('main-plan-type');
 
             if (service.includes('Dish') || service.includes('Cooking')) {
                 dishFields?.classList.remove('hidden');
                 houseFields?.classList.add('hidden');
+                if (planSelect) {
+                    const currentPlan = planSelect.value;
+                    if (service.includes('Cooking')) {
+                        planSelect.innerHTML = `
+                            <option value="one-month">One Month Plan (₹5999/month)</option>
+                            <option value="one-day">One Day Plan (₹199/hr)</option>
+                        `;
+                        planSelect.value = (currentPlan === 'one-day') ? 'one-day' : 'one-month';
+                    } else {
+                        planSelect.innerHTML = `
+                            <option value="one-day">One Day Plan (₹499/hr)</option>
+                            <option value="one-month">One Month Plan (₹4999 flat)</option>
+                        `;
+                        planSelect.value = (currentPlan === 'one-month') ? 'one-month' : 'one-day';
+                    }
+                }
             } else if (service.includes('House') || service.includes('Move')) {
                 dishFields?.classList.add('hidden');
                 houseFields?.classList.remove('hidden');
@@ -947,7 +964,8 @@
                 }
 
                 if (plan === 'one-month') {
-                    if (dishPriceEl) dishPriceEl.textContent = '₹4999';
+                    const monthlyPrice = service.includes('Cooking') ? '₹5999' : '₹4999';
+                    if (dishPriceEl) dishPriceEl.textContent = monthlyPrice;
                     if (hoursWrapper) hoursWrapper.classList.add('hidden');
                     return;
                 }
